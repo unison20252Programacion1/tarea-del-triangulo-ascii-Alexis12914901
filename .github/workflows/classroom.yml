@@ -49,9 +49,7 @@ jobs:
         test-name: test_caracter_vacio
         setup-command: ''
         command: python main.py
-        input: '3
-
-          '
+        input: '3'
         expected-output: 'Error: Se esperan 2 lineas de entrada (altura, caracter)'
         comparison-method: exact
         timeout: 5
@@ -81,49 +79,80 @@ jobs:
           3
           *
         expected-output: |-
-          *
-          **
-          ***
-          **
-          *
+          *****
+           ***
+            *
+           ***
+          *****
         comparison-method: exact
         timeout: 5
         max-score: 10
-    - name: test_figura_altura_4_numeral
-      id: test_figura_altura_4_numeral
+    - name: test_figura_altura_5_asterisco
+      id: test_figura_altura_5_asterisco
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: test_figura_altura_4_numeral
+        test-name: test_figura_altura_5_asterisco
+        setup-command: ''
+        command: python main.py
+        input: |-
+          5
+          *
+        expected-output: |-
+          *********
+           *******
+            *****
+             ***
+              *
+             ***
+            *****
+           *******
+          *********
+        comparison-method: exact
+        timeout: 5
+        max-score: 10
+    - name: test_figura_altura_6_numeral_par
+      id: test_figura_altura_6_numeral_par
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_figura_altura_6_numeral_par
+        setup-command: ''
+        command: python main.py
+        input: |-
+          6
+          #
+        expected-output: |-
+          ###########
+           #########
+            #######
+             #####
+              ###
+               #
+              ###
+             #####
+            #######
+           #########
+          ###########
+        comparison-method: exact
+        timeout: 5
+        max-score: 10
+    - name: test_figura_con_cadena_larga_par
+      id: test_figura_con_cadena_larga_par
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: test_figura_con_cadena_larga_par
         setup-command: ''
         command: python main.py
         input: |-
           4
-          #
-        expected-output: |-
-          #
-          ##
-          ###
-          ####
-          ###
-          ##
-          #
-        comparison-method: exact
-        timeout: 5
-        max-score: 10
-    - name: test_figura_con_cadena_larga
-      id: test_figura_con_cadena_larga
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: test_figura_con_cadena_larga
-        setup-command: ''
-        command: python main.py
-        input: |-
-          2
           ab
         expected-output: |-
-          ab
-          abab
-          ab
+          aaaaaaa
+           aaaaa
+            aaa
+             a
+            aaa
+           aaaaa
+          aaaaaaa
         comparison-method: exact
         timeout: 5
         max-score: 10
@@ -135,6 +164,11 @@ jobs:
         TEST_CARACTER_VACIO_RESULTS: "${{steps.test_caracter_vacio.outputs.result}}"
         TEST_FIGURA_ALTURA_1_RESULTS: "${{steps.test_figura_altura_1.outputs.result}}"
         TEST_FIGURA_ALTURA_3_ASTERISCO_RESULTS: "${{steps.test_figura_altura_3_asterisco.outputs.result}}"
+        TEST_FIGURA_ALTURA_5_ASTERISCO_RESULTS: "${{steps.test_figura_altura_5_asterisco.outputs.result}}"
+        TEST_FIGURA_ALTURA_6_NUMERAL_PAR_RESULTS: "${{steps.test_figura_altura_6_numeral_par.outputs.result}}"
+        TEST_FIGURA_CON_CADENA_LARGA_PAR_RESULTS: "${{steps.test_figura_con_cadena_larga_par.outputs.result}}"
+      with:
+        runners: test_altura_cero,test_altura_negativa,test_caracter_vacio,test_figura_altura_1,test_figura_altura_3_asterisco,test_figura_altura_5_asterisco,test_figura_altura_6_numeral_par,test_figura_con_cadena_larga_par
         TEST_FIGURA_ALTURA_4_NUMERAL_RESULTS: "${{steps.test_figura_altura_4_numeral.outputs.result}}"
         TEST_FIGURA_CON_CADENA_LARGA_RESULTS: "${{steps.test_figura_con_cadena_larga.outputs.result}}"
       with:
